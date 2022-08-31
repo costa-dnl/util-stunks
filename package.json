@@ -1,0 +1,17 @@
+{
+  "name": "util-stunks",
+  "version": "1.1.1",
+  "description": "Pacote de funções bacanas.",
+  "main": "src/",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Stunks Projects",
+  "license": "MIT",
+  "keywords": [
+    "relative-time",
+    "abbreviate",
+    "unabbreviate",
+    "português"
+  ]
+}
