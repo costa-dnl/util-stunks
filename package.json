@@ -1,17 +1,19 @@
 {
   "name": "util-stunks",
-  "version": "1.1.1",
-  "description": "Pacote de funções bacanas.",
+  "version": "1.1.8",
+  "description": "algumas funções ai",
   "main": "src/",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node index.test.js"
   },
-  "author": "Stunks Projects",
+  "author": {
+    "name": "costa.dnl",
+    "url": "https://discord.com/users/418088590334230548"
+  },
   "license": "MIT",
   "keywords": [
-    "relative-time",
+    "relativeTime",
     "abbreviate",
-    "unabbreviate",
-    "português"
+    "unabbreviate"
   ]
 }

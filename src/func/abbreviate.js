@@ -1,27 +1,35 @@
-const abbreviations = require('../numberAbbreviations.json');
+const abbreviations = require('../abbreviations.json');
 
-module.exports = (number, format) => {
-    if(isNaN(number)) return new TypeError('Paramentro não é um numero');
+/**
+ * @param {number | string} input
+ * @param {{display?: number; round?: boolean}} format
+ * @returns {TypeError | string}
+ */
 
-    let displayAtMax = 0,
+module.exports = (input, format) => {
+    if(isNaN(input)) return new TypeError('Paramentro não é um numero');
+    if(!input) return '0';
+
+    let display = 1,
         round = false;
         
     if(typeof format === 'object') {
-        if(typeof format.displayAtMax === 'number' && format.displayAtMax >= 0 && format.displayAtMax <= 2) displayAtMax = format.displayAtMax;
+        if(typeof format.display === 'number' && format.display >= 0 && format.display <= 2) display = format.display;
         if(typeof format.round === 'boolean') round = format.round;
     };
-    if(!number) return 0;
-    displayAtMax = Math.pow(10,displayAtMax);
+
+    let result = '0';
+    display = Math.pow(10,display);
     let abbr = Object.keys(abbreviations);
     
     for(i=abbr.length-1; i>=0; i--) {
         size = Math.pow(10,(i+1)*3);
-        if(size <= number) {
-             number = round ? Math.round(number*displayAtMax/size)/displayAtMax : Math.floor(number*displayAtMax/size)/displayAtMax;
-             number += abbr[i];
+        if(size <= input) {
+             result = round ? Math.round(input*display/size)/display : Math.floor(input*display/size)/display;
+             result += abbr[i];
              break;
         };
     };
     
-    return number;
+    return result;
 };
