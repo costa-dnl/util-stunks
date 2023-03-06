@@ -25,7 +25,7 @@ relativeTIme(1620202020202); // 1 ano 2 meses 15 dias 2 horas 1 segundo 402 mili
 relativeTime(1601010101010, {compact:  true}); // 1me 15d 3h 7m 40s 54ms
 relativeTime(1620202020202, {compact:  true}); // 1a 2me 15d 2h 1s 402ms
 
-relativeTime(1601010101010, {display:  3}); // 1 mes 15 dias 3 horas
+relativeTime(1601010101010, {display:  5}); // 1 mes 15 dias 3 horas 7 minutos 40 segundos
 relativeTime(1620202020202, {display:  2}); // 1 ano 2 meses
 
 relativeTime(1601010101010, {includeMsInSeconds:  true}); // 1 mes 15 dias 3 horas 7 minutos 40 segundos
@@ -36,7 +36,6 @@ relativeTime(1620202020202, {removeMs:  true}); // 1 ano 2 meses 15 dias 2 horas
 
 relativeTime(1601010101010, {separated:  true}); // {months: '1', days: '15', hours: '3', minutes: '7', seconds: '40', milliseconds: '54'}
 relativeTime(1620202020202, {separated:  true}); // {years: '1', months: '2', days: '15', hours: '2', seconds: '1', milliseconds: '402'}
-
 ```
 
 > ### abbreviate(input, format?)
@@ -72,14 +71,12 @@ relativeTime(1620202020202, {separated:  true}); // {years: '1', months: '2', da
 >* **input:**<br>
 > Type: string<br>
 
-### Changelogs: `v1.1.7` => `v1.1.8`:
- - **Adicionado:**<br>
- **Na `v1.1.7`:** Foi adicioado o `version` apenas para vê a versão do pacote (UaU)<br><br>
- - **Mudanças:**<br>
- **Mudança de nome de opção nas funções:** Agora `displayAtMax` é `display` em todas as funções.<br>
- **Estava perdido?** Agora tem indicações nas funções explicando como usa-las.<br>
- **Mais uma polida:** Foi dada mais um polida na função `relativeTime`.
- **é o fim do durationTime?** durationTime foi marcado como descontinuado e na próxima atualização deixará de existir no pacote.<br><br>
+### Changelogs: `v1.1.8` => `v1.1.9`:
+ - **Remoções:**<br>
+ **`durationTime()`:** Conforme prometido, a função `durationTime` foi removida.<br><br>
+
+ - **Correções:**<br>
+ **`abbreviate()`:** Foi corrigido um problema em que a abreviação de valores menores que `1000` retornava `0`. Agora, a abreviação de valores menores que `1000` retorna corretamente o valor abreviado.</br></br>
  
  > Querendo que alguma função entre no pacote? Entre em contato comigo no Discord ou no GitHub.<br>
  > [Discord](https://discord.com/@users/418088590334230548)<br>

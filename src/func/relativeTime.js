@@ -1,6 +1,6 @@
 /**
  * @param {number} ms 
- * @param {{compact: boolean; display: number; separated: boolean; removeMs: boolean; includeMsInSeconds: boolean}} format 
+ * @param {{compact: boolean; display: number; separated: boolean; removeMs: boolean; includeMsInSeconds: boolean}} format
  * @returns {TypeError | string | {decades: string; years: string; months: string; days: string; hours: string; minutes: string; seconds: string; milliseconds: string}}
  */
 
@@ -13,16 +13,13 @@ module.exports = (ms, format) => {
     removeMs = false,
     includeMsInSeconds = false;
 
-  if (typeof format === 'object') {
-    if (typeof format.compact === 'boolean') compact = format.compact;
-    if (typeof format.display === 'number' && format.display > 0 && format.display < 9) display = format.display;
-    if (typeof format.separated === 'boolean') separated = format.separated;
-    if (typeof format.removeMs === 'boolean') removeMs = format.removeMs;
-    if (typeof format.includeMsInSeconds === 'boolean') {
-      includeMsInSeconds = format.includeMsInSeconds;
-      removeMs = includeMsInSeconds || removeMs;
-    }
-  };
+  if (typeof format === 'object' && format !== null) {
+    compact = typeof format.compact === 'boolean' ? format.compact : compact;
+    display = typeof format.display === 'number' && format.display > 0 && format.display < 9 ? format.display : display;
+    separated = typeof format.separated === 'boolean' ? format.separated : separated;
+    removeMs = typeof format.removeMs === 'boolean' ? format.removeMs : removeMs;
+    includeMsInSeconds = typeof format.includeMsInSeconds === 'boolean' ? format.includeMsInSeconds : includeMsInSeconds;
+  }
 
   ms = ms > Date.now() ? ms - Date.now() : Date.now() - ms;
   let decades = Math.floor(ms / 1000 / 60 / 60 / 24 / 30.5 / 12 / 10);
@@ -78,7 +75,7 @@ module.exports = (ms, format) => {
 
   time.decades ? (compact ? time.decades = time.decades + 'dec' : (time.decades > 1 ? time.decades = time.decades + ' décadas' : time.decades = time.decades + ' década')) : '';
   time.years ? (compact ? time.years = time.years + 'a' : (time.years > 1 ? time.years = time.years + ' anos' : time.years = time.years + ' ano')) : '';
-  time.months ? (compact ? time.months = time.months + 'me' : (time.months > 1 ? time.months = time.months + ' meses' : time.months = time.months + ' mes')) : '';
+  time.months ? (compact ? time.months = time.months + 'me' : (time.months > 1 ? time.months = time.months + ' meses' : time.months = time.months + ' mês')) : '';
   time.days ? (compact ? time.days = time.days + 'd' : (time.days > 1 ? time.days = time.days + ' dias' : time.days = time.days + ' dia')) : '';
   time.hours ? (compact ? time.hours = time.hours + 'h' : (time.hours > 1 ? time.hours = time.hours + ' horas' : time.hours = time.hours + ' hora')) : '';
   time.minutes ? (compact ? time.minutes = time.minutes + 'm' : (time.minutes > 1 ? time.minutes = time.minutes + ' minutos' : time.minutes = time.minutes + ' minuto')) : '';

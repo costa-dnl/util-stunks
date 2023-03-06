@@ -18,7 +18,7 @@ module.exports = (input, format) => {
         if(typeof format.round === 'boolean') round = format.round;
     };
 
-    let result = '0';
+    let result = String(input);
     display = Math.pow(10,display);
     let abbr = Object.keys(abbreviations);
     

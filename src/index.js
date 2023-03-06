@@ -31,7 +31,7 @@ const index = new class utilStunks{
      * @example
      * relativeTime(1601010101010); // 1 mes 15 dias 3 horas 7 minutos 40 segundos 54 milissegundos
      * relativeTime(1601010101010, {compact:  true}); // 1me 15d 3h 7m 40s 54ms
-     * relativeTime(1601010101010, {displayAtMax:  3}); // 1 mes 15 dias 3 horas
+     * relativeTime(1601010101010, {displayAtMax: 5}); // 1 mes 15 dias 3 horas 7 minutos 40 segundos
      * relativeTime(1601010101010, {includeMsInSeconds:  true}); // 1 mes 15 dias 3 horas 7 minutos 40 segundos
      * relativeTime(1601010101010, {removeMs:  true}); // 1 mes 15 dias 3 horas 7 minutos 40 segundos
      * relativeTime(1601010101010, {separated:  true}); // {months: '1', days: '15', hours: '3', minutes: '7', seconds: '40', milliseconds: '54'}
@@ -49,23 +49,6 @@ const index = new class utilStunks{
      * unabbreviate('1.555M'); // 1555000
      */
     this.unabbreviate = unabbreviate;
-  }
-  
-  /**
-  * * Função de tempo relativo
-  * @deprecated Essa função foi descontinuada e será removida em um futura atualização.
-  * @param ms Será transformado em tempo relativo
-  * @example
-  * relativeTime(1601010101010); // 1 mes 15 dias 3 horas 7 minutos 40 segundos 54 milissegundos
-  * relativeTime(1601010101010, {compact:  true}); // 1me 15d 3h 7m 40s 54ms
-  * relativeTime(1601010101010, {displayAtMax:  3}); // 1 mes 15 dias 3 horas
-  * relativeTime(1601010101010, {includeMsInSeconds:  true}); // 1 mes 15 dias 3 horas 7 minutos 40 segundos
-  * relativeTime(1601010101010, {removeMs:  true}); // 1 mes 15 dias 3 horas 7 minutos 40 segundos
-  * relativeTime(1601010101010, {separated:  true}); // {months: '1', days: '15', hours: '3', minutes: '7', seconds: '40', milliseconds: '54'}
-  */
-  durationTime(ms, format) {
-    console.warn('--deprecated [#] [utilStunks]: A função "durationTime" foi descontinuada e será removida em alguma futura atualização. Para suprimir essa mensagem, troque a função pela "relativeTime".')
-    return relativeTime(ms, format);
   }
 };
 

@@ -1,7 +1,7 @@
 {
   "name": "util-stunks",
-  "version": "1.1.8",
-  "description": "algumas funções ai",
+  "version": "1.1.9",
+  "description": "Ela é amiga da minha mulher.",
   "main": "src/",
   "scripts": {
     "test": "node index.test.js"
