@@ -1,0 +1,32 @@
+{
+  "years": {
+    "plural": "anos",
+    "unique": "ano",
+    "compact": "a"
+  },
+  "months": {
+    "plural": "meses",
+    "unique": "mês",
+    "compact": "me"
+  },
+  "days": {
+    "plural": "dias",
+    "unique": "dia",
+    "compact": "d"
+  },
+  "minutes": {
+    "plural": "minutos",
+    "unique": "minuto",
+    "compact": "m"
+  },
+  "seconds": {
+    "plural": "segundos",
+    "unique": "segundo",
+    "compact": "s"
+  },
+  "milliseconds": {
+    "plural": "milissegundos",
+    "unique": "milissegundo",
+    "compact": "ms"
+  }
+}

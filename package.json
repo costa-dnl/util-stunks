@@ -1,19 +1,23 @@
 {
-  "name": "util-stunks",
-  "version": "1.1.9",
-  "description": "Ela é amiga da minha mulher.",
-  "main": "src/",
+  "name": "util-stunks-ts",
+  "version": "1.2.0",
+  "main": "dist",
   "scripts": {
-    "test": "node index.test.js"
+    "start": "tsc"
   },
+  "description": "Fuscão preto, você é feito de aço",
   "author": {
-    "name": "costa.dnl",
-    "url": "https://discord.com/users/418088590334230548"
+    "email": "dev.costadnl@gmail.com",
+    "name": "D. Costa",
+    "url": "https://github.com/costa-dnl"
   },
-  "license": "MIT",
   "keywords": [
-    "relativeTime",
     "abbreviate",
-    "unabbreviate"
-  ]
+    "unabbreviate",
+    "relativeTime"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/costa-dnl/util-stunks"
+  }
 }
