@@ -1,11 +1,11 @@
 {
   "name": "util-stunks",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "dist",
   "scripts": {
     "start": "tsc"
   },
-  "description": "Fuscão preto, você é feito de aço",
+  "description": "Enhance your productivity with number abbreviation, relative time calculation, and value conversion",
   "author": {
     "email": "dev.costadnl@gmail.com",
     "name": "D. Costa",
