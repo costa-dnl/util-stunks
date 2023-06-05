@@ -1,3 +1,4 @@
-src/
+#src/
 .gitignore
-tsconfig.json
+#tsconfig.json
+index.test.js
