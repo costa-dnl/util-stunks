@@ -1,4 +1,7 @@
-#src/
+src/
+node_modules/
+.babelrc
 .gitignore
-#tsconfig.json
-index.test.js
+index.test.**
+package-lock.json
+tsconfig.json

@@ -1,2 +1,3 @@
 dist/
-index.test.js
+node_modules/
+index.test.**

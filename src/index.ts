@@ -1,5 +1,5 @@
-import {TimeOptions, timeSeparated} from './utils/time';
-import abbreviate_F, {AbbreviateOptions} from './functions/abbreviate';
+import { TimeOptions, timeSeparated } from './utils/time';
+import abbreviate_F, { AbbreviateOptions } from './functions/abbreviate';
 import msToTime_F from './functions/msToTime';
 import relativeTime_F from './functions/relativeTime';
 import unabbreviate_F from './functions/unabbrevaite';
