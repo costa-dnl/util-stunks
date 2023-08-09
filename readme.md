@@ -1,6 +1,7 @@
 # util-stunks
 
 <div align="center"> 
+
   <img src="https://img.shields.io/npm/v/util-stunks?color=black&label=version" alt="Versão da package"/>
   <img src="https://img.shields.io/npm/dt/util-stunks?color=black" alt="Downloads totais"/>
   <img src="https://img.shields.io/bundlephobia/min/util-stunks?color=black" alt=""/>
@@ -26,7 +27,7 @@
 ### **Exemplos:**
 
 ```js
-import { abbreviate } from 'util-stunks';
+import { abbreviate } from "util-stunks";
 
 abbreviate(100) // 100
 abbreviate(1555400) // 1.5M
@@ -56,7 +57,7 @@ abbreviate(1555400, { round: true }); // 2M
 ### **Exemplos:**
 
 ```js
-import { relativeTime } from 'util-stunks';
+import { relativeTime } from "util-stunks";
 
 relativeTime(1679522572066); // 2 anos 1 mês 15 dias 3 horas 7 minutos 1 segundo 234 milissegundos
 relativeTime(1679522572066, { compact: true }) // 2a 1me 15d 3h 7m 1s 234ms
@@ -76,19 +77,11 @@ relativeTime(1679522572066, { separated: true }); // { years: 2, months: 1, days
 ### **Exemplos:**
 
 ```js
-import { unabbreviate } from 'util-stunks';
+import { unabbreviate } from "util-stunks";
 
-unabbreviate('100'); // 100
-unabbreviate('1M'); // 1000000
-unabbreviate('1.5M'); // 1500000
-unabbreviate('1.56M'); // 1560000
-unabbreviate('1.555M'); // 1555000
+unabbreviate("100"); // 100
+unabbreviate("1M"); // 1000000
+unabbreviate("1.5M"); // 1500000
+unabbreviate("1.56M"); // 1560000
+unabbreviate("1.555M"); // 1555000
 ```
-
-### **Changelogs:** `v1.1.9` => `v1.2.1`:
-
-* **Mudanças:**<br />
-**`throw`:** Agora caso a função estiver sendo executada errada, irá retornar `throw`!
-
-* **Adições:**<br />
-**`msToTime()`:** Uma função muito parecida com a `relativeTime`, o que muda mesmo é só a entrada, da nem vontade de anunciar. 😄 
