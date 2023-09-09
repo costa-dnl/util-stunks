@@ -77,6 +77,8 @@ export default (input: number, options: TimeOptions = defaultTimeOptions): strin
       } else {
         time[interval as keyof TimeSeparated] = val;
       }
+
+      userOption.display--;
     }
   }
 
