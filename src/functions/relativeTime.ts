@@ -1,6 +1,6 @@
 import time, { TimeOptions, defaultTimeOptions } from "../utils/time";
 
-const relativeTime = (input: number, options: TimeOptions = defaultTimeOptions) => {
+const relativeTime = (input: number, options: TimeOptions = defaultTimeOptions): string => {
   if (isNaN(input)) throw new TypeError('Parâmetro não é um número');
   const ms = input > Date.now() ? input - Date.now() : Date.now() - input;
 

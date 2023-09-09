@@ -1,7 +1,7 @@
-import time, { TimeOptions, defaultTimeOptions, timeSeparated } from "../utils/time";
+import time, { TimeOptions, defaultTimeOptions } from "../utils/time";
 
 
-const msToTime = (input: number, options: TimeOptions = defaultTimeOptions): string | timeSeparated => {
+const msToTime = (input: number, options: TimeOptions = defaultTimeOptions): string => {
   return time(input, options);
 };
 
