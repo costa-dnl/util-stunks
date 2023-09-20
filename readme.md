@@ -50,7 +50,6 @@ abbreviate(1555400, { round: true }); // 2M
 > :-: | :-: | :-:
 > compact | boolean | false
 > display | number<sup>[1-7]</sup> | 7
-> separated | boolean | false
 > removeMs | boolean | false
 > includeMsInSeconds | boolean | false
 
