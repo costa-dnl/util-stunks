@@ -109,5 +109,5 @@ export default (input: number, options: TimeOptions = defaultTimeOptions): strin
   }
   result = replace(result);
 
-  return result.trim() || "0";
+  return result.trim() || "";
 };
