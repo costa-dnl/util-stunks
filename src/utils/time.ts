@@ -1,11 +1,5 @@
-import * as times from '../info/time.json';
-
-export interface TimeOptions {
-  compact?: boolean;
-  display?: 1 | 2 | 3 | 4 | 5 | 6 | 7;
-  removeMs?: boolean;
-  includeMsInSeconds?: boolean;
-}
+import { TimeOptions, TimeSeparated, TimeTypes } from "../interface/";
+import times from "../info/time.json";
 
 export const defaultTimeOptions: TimeOptions = {
   compact: false,
@@ -14,18 +8,8 @@ export const defaultTimeOptions: TimeOptions = {
   includeMsInSeconds: false,
 };
 
-export interface TimeSeparated {
-  years?: number;
-  months?: number;
-  days?: number;
-  hours?: number;
-  minutes?: number;
-  seconds?: number;
-  milliseconds?: number;
-}
-
 function replace(inputString: string): string {
-  const lastIndex = inputString.lastIndexOf(',');
+  const lastIndex = inputString.lastIndexOf(",");
   if (lastIndex === -1) {
     return inputString;
   }
@@ -36,17 +20,21 @@ function replace(inputString: string): string {
   return beforeLastComma + " e" + afterLastComma;
 }
 
-export default (input: number, options: TimeOptions = defaultTimeOptions): string => {
-  if (isNaN(input)) throw new TypeError('Parâmetro input deve ser do tipo numérico');
+export default (
+  input: number,
+  options: TimeOptions = defaultTimeOptions
+): string => {
+  if (isNaN(input))
+    throw new TypeError("Parâmetro input deve ser do tipo numérico");
   const userOption: TimeOptions = { ...defaultTimeOptions, ...options };
 
-  const intervalsInMilliseconds: Record<string, number> = {
-    years: 1000 * 60 * 60 * 24 * 365.25,
-    months: 1000 * 60 * 60 * 24 * 30.4375,
-    days: 1000 * 60 * 60 * 24,
-    hours: 1000 * 60 * 60,
-    minutes: 1000 * 60,
-    seconds: 1000,
+  const intervalsInMilliseconds = {
+    years: 315576e5,
+    months: 26298e5,
+    days: 864e5,
+    hours: 36e5,
+    minutes: 6e3,
+    seconds: 1e3,
     milliseconds: 1,
   };
 
@@ -54,10 +42,11 @@ export default (input: number, options: TimeOptions = defaultTimeOptions): strin
   let ms: number = input;
 
   for (const interval in intervalsInMilliseconds) {
-    if (ms >= intervalsInMilliseconds[interval]) {
-      const val: number = Math.floor(ms / intervalsInMilliseconds[interval]);
+    if (!intervalsInMilliseconds[interval as keyof TimeSeparated]) continue;
+    if (ms >= intervalsInMilliseconds[interval as keyof TimeSeparated]) {
+      const val: number = Math.floor(ms / intervalsInMilliseconds[interval as keyof TimeSeparated]);
       timeIntervals[interval] = val;
-      ms -= val * intervalsInMilliseconds[interval];
+      ms -= val * intervalsInMilliseconds[interval as keyof TimeSeparated];
     }
   }
 
@@ -67,10 +56,12 @@ export default (input: number, options: TimeOptions = defaultTimeOptions): strin
     const val: number | undefined = timeIntervals[interval];
 
     if (val && userOption.display) {
-      if (interval === 'milliseconds') {
+      if (interval === "milliseconds") {
         if (userOption.removeMs) continue;
         if (userOption.includeMsInSeconds && time.seconds) {
-          time.seconds = Number(time.seconds + '.' + String(val).padStart(3, '0').slice(0, 1));
+          time.seconds = Number(
+            time.seconds + "." + String(val).padStart(3, "0").slice(0, 1)
+          );
         } else {
           time.milliseconds = val;
         }
@@ -82,15 +73,11 @@ export default (input: number, options: TimeOptions = defaultTimeOptions): strin
     }
   }
 
-  let result = '';
+  let result = "";
   let isFirst = true;
 
   for (const interval in times) {
-    const val: {
-      plural: string;
-      unique: string;
-      compact: string;
-    } = times[interval as keyof typeof times];
+    const val: TimeTypes = times[interval as keyof typeof times];
     const value = time[interval as keyof TimeSeparated];
 
     if (value !== undefined) {
