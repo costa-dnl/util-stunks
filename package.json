@@ -1,6 +1,6 @@
 {
   "name": "util-stunks",
-  "version": "1.2.9",
+  "version": "1.2.91",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -25,6 +25,6 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.12.12",
-    "typescript": "^5.4.5"
+    "typescript": "^5.9.3"
   }
 }
