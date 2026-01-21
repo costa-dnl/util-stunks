@@ -26,13 +26,7 @@ export const abbreviate = (input: number, options: AbbreviateOptions = { display
   for (let i: number = abbr.length - 1; i >= 0; i--) {
     const size: number = Math.pow(10, (i + 1) * 3);
     if (size <= input) {
-      if (round)
-        result =
-          Math.round((input * calcDisplay) / size) / calcDisplay + abbr[i];
-      else
-        result =
-          Math.floor((input * calcDisplay) / size) / calcDisplay + abbr[i];
-
+      result = round ? Math.round((input * calcDisplay) / size) / calcDisplay + abbr[i] : Math.floor((input * calcDisplay) / size) / calcDisplay + abbr[i];
       break;
     }
   }
