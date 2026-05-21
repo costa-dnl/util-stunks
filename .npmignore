@@ -1,7 +1,7 @@
 src/
 node_modules/
+tests/
 .babelrc
 .gitignore
-index.test.**
 package-lock.json
 tsconfig.json

@@ -33,7 +33,7 @@ export default (
     months: 26298e5,
     days: 864e5,
     hours: 36e5,
-    minutes: 6e3,
+    minutes: 6e4,
     seconds: 1e3,
     milliseconds: 1,
   };
