@@ -1,4 +1,4 @@
-import { TimeOptions, TimeSeparated, TimeTypes } from "../interface/";
+import { TimeLabelUnit, TimeLabels, TimeOptions, TimeSeparated, TimeTypes } from "../interface/";
 import times from "../info/time.json";
 
 export const defaultTimeOptions: TimeOptions = {
@@ -8,7 +8,48 @@ export const defaultTimeOptions: TimeOptions = {
   includeMsInSeconds: false,
 };
 
-function replace(inputString: string): string {
+const defaultSeparator = "e";
+
+function isValidLabelUnit(value: unknown): value is TimeLabelUnit {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    !Array.isArray(value) &&
+    typeof (value as TimeLabelUnit).plural === "string" &&
+    (value as TimeLabelUnit).plural.length > 0 &&
+    typeof (value as TimeLabelUnit).unique === "string" &&
+    (value as TimeLabelUnit).unique.length > 0
+  );
+}
+
+function resolveLabels(labels?: TimeLabels): {
+  units: typeof times;
+  separator: string;
+} {
+  const units = { ...times } as typeof times;
+
+  if (labels && typeof labels === "object") {
+    for (const key of Object.keys(times) as (keyof typeof times)[]) {
+      const candidate = labels[key as keyof TimeLabels];
+      if (isValidLabelUnit(candidate)) {
+        units[key] = {
+          ...units[key],
+          plural: candidate.plural,
+          unique: candidate.unique,
+        };
+      }
+    }
+  }
+
+  const separator =
+    labels && typeof labels.separator === "string" && labels.separator.length > 0
+      ? labels.separator
+      : defaultSeparator;
+
+  return { units, separator };
+}
+
+function replace(inputString: string, separator: string): string {
   const lastIndex = inputString.lastIndexOf(",");
   if (lastIndex === -1) {
     return inputString;
@@ -17,12 +58,13 @@ function replace(inputString: string): string {
   const beforeLastComma = inputString.slice(0, lastIndex);
   const afterLastComma = inputString.slice(lastIndex + 1);
 
-  return beforeLastComma + " e" + afterLastComma;
+  return beforeLastComma + " " + separator + afterLastComma;
 }
 
 export default (
   input: number,
-  options: TimeOptions = defaultTimeOptions
+  options: TimeOptions = defaultTimeOptions,
+  labels?: TimeLabels
 ): string => {
   if (isNaN(input))
     throw new TypeError("Parâmetro input deve ser do tipo numérico");
@@ -73,11 +115,15 @@ export default (
     }
   }
 
+  const { units, separator } = resolveLabels(labels);
+
   let result = "";
   let isFirst = true;
 
   for (const interval in times) {
-    const val: TimeTypes = times[interval as keyof typeof times];
+    const val: TimeTypes = userOption.compact
+      ? times[interval as keyof typeof times]
+      : units[interval as keyof typeof units];
     const value = time[interval as keyof TimeSeparated];
 
     if (value !== undefined) {
@@ -94,7 +140,7 @@ export default (
       isFirst = false;
     }
   }
-  result = replace(result);
+  result = replace(result, separator);
 
   return result.trim() || "";
 };

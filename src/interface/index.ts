@@ -42,6 +42,22 @@ export interface TimeTypes {
   compact: string;
 }
 
+export interface TimeLabelUnit {
+  plural: string;
+  unique: string;
+}
+
+export interface TimeLabels {
+  years?: TimeLabelUnit;
+  months?: TimeLabelUnit;
+  days?: TimeLabelUnit;
+  hours?: TimeLabelUnit;
+  minutes?: TimeLabelUnit;
+  seconds?: TimeLabelUnit;
+  milliseconds?: TimeLabelUnit;
+  separator?: string;
+}
+
 export interface OptionsRandomArray {
   quantity?: number;
   removeSelectItem?: boolean;
