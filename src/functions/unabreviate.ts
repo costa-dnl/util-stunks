@@ -4,7 +4,7 @@ export const unabbreviate = (input: string): number => {
   if (typeof input !== 'string') throw new TypeError('Parâmetro deve ser do tipo string');
 
   const num: number = parseFloat(input);
-  const unit: string = input.substring(-1).toLowerCase();
+  const unit: string = input.slice(-1).toLowerCase();
   const abbr: string[] = Object.keys(abbreviations).map((x: string) => x.toLowerCase());
 
   if (abbr.indexOf(unit) === -1) return parseFloat(input)

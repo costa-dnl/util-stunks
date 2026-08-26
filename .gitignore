@@ -1,3 +1,20 @@
-dist/
+# Dependências instaladas localmente
 node_modules/
-tests/
+
+# Saída gerada pelo compilador TypeScript
+dist/
+
+# Cobertura e relatórios de testes
+coverage/
+
+# Pacotes criados por `npm pack`
+*.tgz
+
+# Logs locais do Node.js e npm
+*.log
+npm-debug.log*
+
+# Arquivos locais de ambiente
+.env
+.env.*
+!.env.example
