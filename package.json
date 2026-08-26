@@ -8,7 +8,7 @@
     "build": "tsc",
     "test": "vitest run tests/src.test.ts",
     "test:dist": "node --test tests/dist.test.js",
-    "test:watch": "vitest tests/util-stunks.test.ts",
+    "test:watch": "vitest tests/src.test.ts",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run typecheck && npm test && npm run build && npm run test:dist"
   },
@@ -33,7 +33,7 @@
   ],
   "devDependencies": {
     "@types/node": "^24.13.3",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "vitest": "^4.1.11"
   }
 }
