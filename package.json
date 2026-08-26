@@ -5,7 +5,12 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "vitest run tests/util-stunks.test.ts",
+    "test:dist": "node --test tests/dist.test.js",
+    "test:watch": "vitest tests/util-stunks.test.ts",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build && npm run test:dist"
   },
   "description": "Enhance your productivity with number abbreviation, relative time calculation, and value conversion",
   "author": {
@@ -23,8 +28,12 @@
     "url": "https://github.com/costa-dnl/util-stunks"
   },
   "license": "MIT",
+  "files": [
+    "dist"
+  ],
   "devDependencies": {
-    "@types/node": "^20.12.12",
-    "typescript": "^5.9.3"
+    "@types/node": "^20.19.0",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
   }
 }

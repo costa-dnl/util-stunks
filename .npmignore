@@ -1,7 +1,21 @@
+# Código-fonte e arquivos usados somente no desenvolvimento
 src/
-node_modules/
 tests/
-.babelrc
-.gitignore
-package-lock.json
 tsconfig.json
+
+# Dependências instaladas localmente
+node_modules/
+
+# Automação e manutenção do repositório
+.github/
+.gitignore
+CONTRIBUTING.md
+SECURITY.md
+
+# Arquivos locais que não fazem parte da distribuição
+coverage/
+*.log
+*.tgz
+
+# O lockfile é usado no desenvolvimento, mas não é distribuído
+package-lock.json
