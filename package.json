@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "vitest run tests/util-stunks.test.ts",
+    "test": "vitest run tests/src.test.ts",
     "test:dist": "node --test tests/dist.test.js",
     "test:watch": "vitest tests/util-stunks.test.ts",
     "typecheck": "tsc --noEmit",
