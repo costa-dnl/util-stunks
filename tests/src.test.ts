@@ -18,8 +18,10 @@ describe("abbreviate", () => {
     (input, expected) => expect(abbreviate(input)).toBe(expected),
   );
 
-  it("rejeita valores que não são números", () => {
+  it("rejeita valores que não são números finitos", () => {
     expect(() => abbreviate(Number.NaN)).toThrow(TypeError);
+    expect(() => abbreviate(Infinity)).toThrow(TypeError);
+    expect(() => abbreviate(-Infinity)).toThrow(TypeError);
   });
 });
 

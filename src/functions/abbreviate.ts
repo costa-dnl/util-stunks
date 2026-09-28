@@ -5,7 +5,7 @@ export const abbreviate = (
   input: number,
   options: AbbreviateOptions = { display: 1, round: false }
 ): string => {
-  if (typeof input !== "number" || isNaN(input)) {
+  if (typeof input !== "number" || !Number.isFinite(input)) {
     throw new TypeError("O parâmetro deve ser um número válido.");
   }
 
