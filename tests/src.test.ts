@@ -32,6 +32,11 @@ describe("unabbreviate", () => {
   it("rejeita entradas que não são strings", () => {
     expect(() => unabbreviate(10 as unknown as string)).toThrow(TypeError);
   });
+
+  it("rejeita string vazia ou só espaços", () => {
+    expect(() => unabbreviate("")).toThrow(TypeError);
+    expect(() => unabbreviate("   ")).toThrow(TypeError);
+  });
 });
 
 describe("conversões de tempo", () => {
@@ -102,8 +107,14 @@ describe("randomArray - não muta o original", () => {
   });
 });
 
-describe("abbreviate - negativos", () => {
+describe("abbreviate - negativos e overflow", () => {
   it("suporta números negativos", () => {
     expect(abbreviate(-1500)).toBe("-1.5K");
+  });
+
+  it("não gera Infinity em valores muito grandes", () => {
+    const result = abbreviate(-2e307);
+    expect(result).not.toContain("Infinity");
+    expect(result.startsWith("-")).toBe(true);
   });
 });

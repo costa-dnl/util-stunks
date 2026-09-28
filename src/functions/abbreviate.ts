@@ -38,9 +38,10 @@ export const abbreviate = (
   for (let i = abbr.length - 1; i >= 0; i--) {
     const size = Math.pow(10, (i + 1) * 3);
     if (size <= absInput) {
+      const scaled = (absInput / size) * calcDisplay;
       const value = round
-        ? Math.round((absInput * calcDisplay) / size) / calcDisplay
-        : Math.floor((absInput * calcDisplay) / size) / calcDisplay;
+        ? Math.round(scaled) / calcDisplay
+        : Math.floor(scaled) / calcDisplay;
 
       result = value + abbr[i];
       break;

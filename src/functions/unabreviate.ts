@@ -15,7 +15,9 @@ export const unabbreviate = (input: string): number => {
   }
 
   const cleaned = input.trim().toLowerCase();
-  if (!cleaned) return 0;
+  if (!cleaned) {
+    throw new TypeError(`Valor inválido: "${input}".`);
+  }
 
   for (const unit of sortedUnits) {
     if (cleaned.endsWith(unit)) {
