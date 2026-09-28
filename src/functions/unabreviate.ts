@@ -1,8 +1,11 @@
 import abbreviations from "../info/numbers.json";
 
-const abbrMap: Record<string, number> = Object.fromEntries(
-  Object.entries(abbreviations).map(([k, v]) => [k.toLowerCase(), Number(v)])
-);
+const abbrMap: Record<string, number> = {};
+for (const key of Object.keys(abbreviations)) {
+  abbrMap[key.toLowerCase()] = Number(
+    (abbreviations as Record<string, number>)[key]
+  );
+}
 
 const sortedUnits = Object.keys(abbrMap).sort((a, b) => b.length - a.length);
 
