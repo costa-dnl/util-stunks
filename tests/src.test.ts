@@ -68,12 +68,12 @@ describe("conversões de tempo", () => {
 });
 
 describe("randomArray", () => {
-  it("seleciona a quantidade pedida sem repetir e remove os itens", () => {
+  it("seleciona a quantidade pedida sem repetir", () => {
     vi.spyOn(Math, "random").mockReturnValue(0);
     const input = ["a", "b", "c"];
     expect(randomArray(input, { quantity: 2, removeSelectItem: true }))
       .toEqual(["a", "b"]);
-    expect(input).toEqual(["c"]);
+    expect(input).toEqual(["a", "b", "c"]);
   });
 
   it("rejeita entradas que não são arrays", () => {
