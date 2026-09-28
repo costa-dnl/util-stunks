@@ -18,18 +18,17 @@ export const randomArray = <T>(
     throw new Error("A opção 'quantity' deve ser maior ou igual a 1.");
   }
 
-  const source = options.removeSelectItem ? [...input] : input;
+  const shouldRemove = options.removeSelectItem !== false;
+  const source = shouldRemove ? [...input] : input;
   const result: T[] = [];
 
-  const max = options.removeSelectItem
-    ? Math.min(quantity, source.length)
-    : quantity;
+  const max = shouldRemove ? Math.min(quantity, source.length) : quantity;
 
   for (let i = 0; i < max; i++) {
     const index = Math.floor(Math.random() * source.length);
-    result.push(source[index]);
+    result.push(source[index] as T);
 
-    if (options.removeSelectItem) {
+    if (shouldRemove) {
       source.splice(index, 1);
     }
   }

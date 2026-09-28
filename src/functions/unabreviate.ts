@@ -1,7 +1,7 @@
 import abbreviations from "../info/numbers.json";
 
-const abbrMap = Object.fromEntries(
-  Object.entries(abbreviations).map(([k, v]) => [k.toLowerCase(), v as number])
+const abbrMap: Record<string, number> = Object.fromEntries(
+  Object.entries(abbreviations).map(([k, v]) => [k.toLowerCase(), Number(v)])
 );
 
 const sortedUnits = Object.keys(abbrMap).sort((a, b) => b.length - a.length);
@@ -23,7 +23,12 @@ export const unabbreviate = (input: string): number => {
         throw new TypeError(`Não foi possível extrair um número de "${input}".`);
       }
 
-      return num * abbrMap[unit];
+      const multiplier = abbrMap[unit];
+      if (multiplier === undefined) {
+        continue;
+      }
+
+      return num * multiplier;
     }
   }
 

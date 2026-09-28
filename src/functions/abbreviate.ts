@@ -14,7 +14,7 @@ export const abbreviate = (
   const isNegative = input < 0;
   const absInput = Math.abs(input);
 
-  let display: 0 | 1 | 2 = 1;
+  let display = 1;
   let round = false;
 
   if (typeof options === "object" && options !== null) {
@@ -23,7 +23,7 @@ export const abbreviate = (
       options.display >= 0 &&
       options.display <= 2
     ) {
-      display = options.display as 0 | 1 | 2;
+      display = options.display;
     }
     if (typeof options.round === "boolean") {
       round = options.round;
