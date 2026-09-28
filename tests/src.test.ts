@@ -80,3 +80,30 @@ describe("randomArray", () => {
     expect(() => randomArray("a" as unknown as string[])).toThrow(TypeError);
   });
 });
+
+describe("unabbreviate - edge cases", () => {
+  it.each([
+    ["1.5Qa", 1.5e15],
+    ["2Qi", 2e18],
+    ["-3.5M", -3.5e6],
+    ["  1.2k  ", 1200],
+    ["42", 42],
+  ])("expande %s para %s", (input, expected) => {
+    expect(unabbreviate(input)).toBe(expected);
+  });
+});
+
+describe("randomArray - não muta o original", () => {
+  it("mantém o array original intacto", () => {
+    const original = ["a", "b", "c"];
+    const copy = [...original];
+    randomArray(original, { quantity: 2, removeSelectItem: true });
+    expect(original).toEqual(copy);
+  });
+});
+
+describe("abbreviate - negativos", () => {
+  it("suporta números negativos", () => {
+    expect(abbreviate(-1500)).toBe("-1.5K");
+  });
+});
