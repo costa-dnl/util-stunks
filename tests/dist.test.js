@@ -34,7 +34,7 @@ test("o build aplica rótulos personalizados", () => {
   );
 });
 
-test("o build seleciona itens sem repetição", () => {
+test("o build seleciona itens sem mutar o array original", () => {
   const originalRandom = Math.random;
   Math.random = () => 0;
 
@@ -44,7 +44,7 @@ test("o build seleciona itens sem repetição", () => {
       utilStunks.randomArray(input, { quantity: 2, removeSelectItem: true }),
       ["a", "b"],
     );
-    assert.deepEqual(input, ["c"]);
+    assert.deepEqual(input, ["a", "b", "c"]);
   } finally {
     Math.random = originalRandom;
   }

@@ -1,35 +1,52 @@
 import { AbbreviateOptions } from "../interface";
 import abbreviations from "../info/numbers.json";
 
-export const abbreviate = (input: number, options: AbbreviateOptions = { display: 1, round: false }): string => {
-  if (isNaN(input)) throw new TypeError("Parâmentro não é um número.");
-  if (!input) return "0";
+export const abbreviate = (
+  input: number,
+  options: AbbreviateOptions = { display: 1, round: false }
+): string => {
+  if (typeof input !== "number" || !Number.isFinite(input)) {
+    throw new TypeError("O parâmetro deve ser um número válido.");
+  }
 
-  let display: 0 | 1 | 2 = 1;
-  let round: boolean = false;
+  if (input === 0) return "0";
 
-  if (typeof options === "object") {
+  const isNegative = input < 0;
+  const absInput = Math.abs(input);
+
+  let display = 1;
+  let round = false;
+
+  if (typeof options === "object" && options !== null) {
     if (
       typeof options.display === "number" &&
       options.display >= 0 &&
       options.display <= 2
-    )
+    ) {
       display = options.display;
-
-    if (typeof options.round === "boolean") round = options.round;
+    }
+    if (typeof options.round === "boolean") {
+      round = options.round;
+    }
   }
 
-  let result: string = String(input);
-  let calcDisplay: number = Math.pow(10, display);
-  let abbr: string[] = Object.keys(abbreviations);
+  const calcDisplay = Math.pow(10, display);
+  const abbr = Object.keys(abbreviations);
 
-  for (let i: number = abbr.length - 1; i >= 0; i--) {
-    const size: number = Math.pow(10, (i + 1) * 3);
-    if (size <= input) {
-      result = round ? Math.round((input * calcDisplay) / size) / calcDisplay + abbr[i] : Math.floor((input * calcDisplay) / size) / calcDisplay + abbr[i];
+  let result = String(absInput);
+
+  for (let i = abbr.length - 1; i >= 0; i--) {
+    const size = Math.pow(10, (i + 1) * 3);
+    if (size <= absInput) {
+      const scaled = (absInput / size) * calcDisplay;
+      const value = round
+        ? Math.round(scaled) / calcDisplay
+        : Math.floor(scaled) / calcDisplay;
+
+      result = value + abbr[i];
       break;
     }
   }
 
-  return result;
+  return isNegative ? `-${result}` : result;
 };

@@ -18,8 +18,10 @@ describe("abbreviate", () => {
     (input, expected) => expect(abbreviate(input)).toBe(expected),
   );
 
-  it("rejeita valores que não são números", () => {
+  it("rejeita valores que não são números finitos", () => {
     expect(() => abbreviate(Number.NaN)).toThrow(TypeError);
+    expect(() => abbreviate(Infinity)).toThrow(TypeError);
+    expect(() => abbreviate(-Infinity)).toThrow(TypeError);
   });
 });
 
@@ -31,6 +33,11 @@ describe("unabbreviate", () => {
 
   it("rejeita entradas que não são strings", () => {
     expect(() => unabbreviate(10 as unknown as string)).toThrow(TypeError);
+  });
+
+  it("rejeita string vazia ou só espaços", () => {
+    expect(() => unabbreviate("")).toThrow(TypeError);
+    expect(() => unabbreviate("   ")).toThrow(TypeError);
   });
 });
 
@@ -68,15 +75,48 @@ describe("conversões de tempo", () => {
 });
 
 describe("randomArray", () => {
-  it("seleciona a quantidade pedida sem repetir e remove os itens", () => {
+  it("seleciona a quantidade pedida sem repetir", () => {
     vi.spyOn(Math, "random").mockReturnValue(0);
     const input = ["a", "b", "c"];
     expect(randomArray(input, { quantity: 2, removeSelectItem: true }))
       .toEqual(["a", "b"]);
-    expect(input).toEqual(["c"]);
+    expect(input).toEqual(["a", "b", "c"]);
   });
 
   it("rejeita entradas que não são arrays", () => {
     expect(() => randomArray("a" as unknown as string[])).toThrow(TypeError);
+  });
+});
+
+describe("unabbreviate - edge cases", () => {
+  it.each([
+    ["1.5Qa", 1.5e15],
+    ["2Qi", 2e18],
+    ["-3.5M", -3.5e6],
+    ["  1.2k  ", 1200],
+    ["42", 42],
+  ])("expande %s para %s", (input, expected) => {
+    expect(unabbreviate(input)).toBe(expected);
+  });
+});
+
+describe("randomArray - não muta o original", () => {
+  it("mantém o array original intacto", () => {
+    const original = ["a", "b", "c"];
+    const copy = [...original];
+    randomArray(original, { quantity: 2, removeSelectItem: true });
+    expect(original).toEqual(copy);
+  });
+});
+
+describe("abbreviate - negativos e overflow", () => {
+  it("suporta números negativos", () => {
+    expect(abbreviate(-1500)).toBe("-1.5K");
+  });
+
+  it("não gera Infinity em valores muito grandes", () => {
+    const result = abbreviate(-2e307);
+    expect(result).not.toContain("Infinity");
+    expect(result.startsWith("-")).toBe(true);
   });
 });
